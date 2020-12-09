@@ -15,7 +15,7 @@ The prediction with Docker is on a single EC2 instance.
 Pulled docker image onto ec2 instance and predicted output.
 Steps to run docker file on EC2:
 Copy the TestDataset.csv into EC2 /home/ec2-user using following command:
- scp -i path/TestDataset.csv publicDNS of ec2 here:/home/ec2-user
+scp -i path/TestDataset.csv publicDNS of ec2 here:/home/ec2-user
 In EC2 install docker use following command: sudo yum update -y sudo yum install docker -y sudo service docker start
 Pull the image using:
 Sudo docker pull kusumayreddy/my-app
