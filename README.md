@@ -38,7 +38,7 @@ Sudo Docker run -v c:/Kusuma/users/downloads/testdataset.csv:/usr/src/app/testda
 
 OUTPUT:
 
-Predictions top 5 rows F1 score and accuracy 
+Predictions with top 5 rows, F1 score and accuracy 
 
 Github/Docker hub repository links:
 
