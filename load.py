@@ -1,4 +1,4 @@
-from pyspark.ml.classification import DecisionTreeClassifier
+from pyspark.ml.classification import DecisionTreeClassifier , DecisionTreeClassificationModel
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
 from pyspark.ml.regression import LinearRegression
 
@@ -20,10 +20,9 @@ assembler = VectorAssembler(inputCols=['"""""fixed acidity""""', '""""volatile a
 spDF1 = assembler.transform(test)
 fd1=spDF1.select("features",'""""quality"""""')
 
-lr = DecisionTreeClassifier( featuresCol="features", labelCol='""""quality"""""')
 
 # Fit the model
-lrModel = lr.load('myModel')
+lrModel = DecisionTreeClassificationModel.load("myModel")
 predictions = lrModel.transform(fd1)
 predictions.show(5)
 # obtain evaluator.
