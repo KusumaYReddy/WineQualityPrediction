@@ -7,6 +7,7 @@ from pyspark.shell import spark
 from pyspark.ml.linalg import Vectors
 
 from pyspark.ml.feature import VectorAssembler
+from pyspark.sql.types import DoubleType
 
 
 test = spark.read.csv('TestDataset.csv',header=True,inferSchema=True, sep=";")
