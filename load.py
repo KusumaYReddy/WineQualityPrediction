@@ -23,5 +23,9 @@ predictions.show(5)
 evaluator = MulticlassClassificationEvaluator(metricName="accuracy",labelCol='""""quality"""""',predictionCol='prediction')
 
 # compute the classification error on test data.
-f1 = evaluator.evaluate(predictions)
+accuracy = evaluator.evaluate(predictions)
+pred=predictions.withColumn('""""quality"""""', predictions['""""quality"""""'].cast(DoubleType()))
+LabelsPred=pred.select('prediction','""""quality"""""').rdd
+lrmetrics = MulticlassMetrics(LabelsPred)
+f1=lrmetrics.weightedFMeasure()
 print("F1 score : " ,f1)
