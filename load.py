@@ -8,12 +8,6 @@ from pyspark.ml.linalg import Vectors
 
 from pyspark.ml.feature import VectorAssembler
 
-# training = spark.read.csv('TrainingDataset.csv',header=True,inferSchema=True, sep=";")
-#
-#
-# assembler = VectorAssembler(inputCols=['"""""fixed acidity""""', '""""volatile acidity""""','""""citric acid""""','""""residual sugar""""','""""chlorides""""','""""free sulfur dioxide""""','""""total sulfur dioxide""""','""""density""""','""""pH""""','""""sulphates""""','""""alcohol""""','""""quality"""""'], outputCol="features")
-# spDF = assembler.transform(training)
-# fd=spDF.select("features",'""""quality"""""')
 
 test = spark.read.csv('TestDataset.csv',header=True,inferSchema=True, sep=";")
 assembler = VectorAssembler(inputCols=['"""""fixed acidity""""', '""""volatile acidity""""','""""citric acid""""','""""residual sugar""""','""""chlorides""""','""""free sulfur dioxide""""','""""total sulfur dioxide""""','""""density""""','""""pH""""','""""sulphates""""','""""alcohol""""','""""quality"""""'], outputCol="features")
@@ -21,7 +15,7 @@ spDF1 = assembler.transform(test)
 fd1=spDF1.select("features",'""""quality"""""')
 
 
-# Fit the model
+# load the model
 lrModel = DecisionTreeClassificationModel.load("myModel")
 predictions = lrModel.transform(fd1)
 predictions.show(5)
