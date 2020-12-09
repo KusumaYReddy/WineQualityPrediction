@@ -1,12 +1,14 @@
-from pyspark.ml.classification import DecisionTreeClassifier
+from pyspark.ml.classification import DecisionTreeClassifier, DecisionTreeClassificationModel
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
 from pyspark.ml.regression import LinearRegression
 
 # Load training data
+from pyspark.mllib.evaluation import MulticlassMetrics
 from pyspark.shell import spark
 from pyspark.ml.linalg import Vectors
 
 from pyspark.ml.feature import VectorAssembler
+from pyspark.sql.types import DoubleType
 
 training = spark.read.csv('TrainingDataset.csv',header=True,inferSchema=True, sep=";")
 
@@ -30,5 +32,9 @@ predictions.show(5)
 evaluator = MulticlassClassificationEvaluator(metricName="accuracy",labelCol='""""quality"""""',predictionCol='prediction')
 
 # compute the classification error on test data.
-f1 = evaluator.evaluate(predictions)
+accuracy = evaluator.evaluate(predictions)
+pred=predictions.withColumn('""""quality"""""', predictions['""""quality"""""'].cast(DoubleType()))
+LabelsPred=pred.select('prediction','""""quality"""""').rdd
+lrmetrics = MulticlassMetrics(LabelsPred)
+f1=lrmetrics.weightedFMeasure()
 print("F1 score : " ,f1)
