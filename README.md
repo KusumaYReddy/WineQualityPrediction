@@ -36,6 +36,9 @@ Replace c:/Kusuma/users/downloads/testdataset.csv with your local path.
 
 Sudo Docker run -v c:/Kusuma/users/downloads/testdataset.csv:/usr/src/app/testdataset.csv kusumayreddy/my-app:1.0
 
+OUTPUT:
+
+Predictions top 5 rows F1 score and accuracy 
 
 Github/Docker hub repository links:
 
